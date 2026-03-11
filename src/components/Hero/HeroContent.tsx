@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const HeroContent = () => {
     return (
-        <div className="flex flex-col justify-center h-full px-6 md:px-16 lg:px-24 py-20 md:py-0 text-center md:text-left">
+        <div className="flex flex-col justify-center h-full px-6 md:px-16 lg:px-24 py-4 md:py-0 text-center md:text-left">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

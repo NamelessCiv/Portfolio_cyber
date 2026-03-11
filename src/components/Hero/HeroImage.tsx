@@ -9,7 +9,7 @@ interface HeroImageProps {
 
 const HeroImage = ({ imagePath }: HeroImageProps) => {
     return (
-        <div className="relative w-full h-[50vh] md:w-[45%] lg:w-[35%] md:h-[65vh] mt-10 md:mt-auto lg:my-auto flex items-center justify-center">
+        <div className="relative w-full h-auto py-6 md:py-0 md:w-[45%] lg:w-[35%] md:h-[65vh] md:mt-auto lg:my-auto flex items-center justify-center">
             {/* 
                 Clean, modern frame for the profile photo
             */}
