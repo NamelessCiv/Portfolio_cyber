@@ -23,11 +23,32 @@ const ContactForm = () => {
         setIsError(false);
         setErrorMessage("");
 
-        // Simple validation
+        // Simple validation & Size limits
         const email = formData.get("email") as string;
+        const name = formData.get("name") as string;
+        const message = formData.get("message") as string;
+
+        // Prevent massive payloads (DoS protection)
+        if (name?.length > 100 || email?.length > 100 || message?.length > 1000) {
+            setErrorMessage("Veuillez raccourcir votre message. La taille maximale a été dépassée.");
+            setIsError(true);
+            setIsLoading(false);
+            return;
+        }
+
+        // Email format validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setErrorMessage("Veuillez entrer une adresse email valide.");
+            setIsError(true);
+            setIsLoading(false);
+            return;
+        }
+
+        // Basic XSS Sanitization (preventing HTML tags)
+        const hasHtmlTags = /<[^>]*>?/gm;
+        if (hasHtmlTags.test(name) || hasHtmlTags.test(message)) {
+            setErrorMessage("Caractères non autorisés détectés. Veuillez utiliser du texte brut.");
             setIsError(true);
             setIsLoading(false);
             return;
