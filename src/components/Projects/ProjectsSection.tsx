@@ -3,27 +3,28 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-{
-    title: "Réponse aux Incidents : Playbooks & SIEM",
+const projects = [
+    {
+        title: "Réponse aux Incidents : Playbooks & SIEM",
         description: "Détection d'incidents de sécurité critiques, analyse des logs via SIEM, et mise en œuvre des procédures de réponse documentées.",
-            tags: ["RISK ANALYSIS", "SIEM", "INCIDENT RESPONSE"],
-                img: "/project-soc.jpg",
-                    url: "https://coursera.org/share/ff16c9f88206d4acb96ceae4da3f4332"
-},
-{
-    title: "Investigation & Scripting BASH/SQL",
+        tags: ["RISK ANALYSIS", "SIEM", "INCIDENT RESPONSE"],
+        img: "/project-soc.jpg",
+        url: "https://coursera.org/share/ff16c9f88206d4acb96ceae4da3f4332"
+    },
+    {
+        title: "Investigation & Scripting BASH/SQL",
         description: "Automatisation de la gestion des systèmes de fichiers sous Linux via Bash et requêtes SQL pour extraire des preuves d'accès non autorisés.",
-            tags: ["LINUX", "BASH", "SQL", "FORENSICS"],
-                img: "/project-malware.jpg",
-                    url: "https://coursera.org/share/0abf79b15b7a981efbc1db0cffc7e614"
-},
-{
-    title: "Évaluation des Menaces & Vulnérabilités",
+        tags: ["LINUX", "BASH", "SQL", "FORENSICS"],
+        img: "/project-malware.jpg",
+        url: "https://coursera.org/share/0abf79b15b7a981efbc1db0cffc7e614"
+    },
+    {
+        title: "Évaluation des Menaces & Vulnérabilités",
         description: "Classification des actifs organisationnels, analyse des menaces de sécurité et évaluation avancée des vulnérabilités des systèmes.",
-            tags: ["VULNERABILITY", "THREAT MODELING", "ASSETS"],
-                img: "/project-scanner.jpg",
-                    url: "https://coursera.org/share/407a16fc6470332a324d9cc26fb7adb4"
-}
+        tags: ["VULNERABILITY", "THREAT MODELING", "ASSETS"],
+        img: "/project-scanner.jpg",
+        url: "https://coursera.org/share/407a16fc6470332a324d9cc26fb7adb4"
+    }
 ];
 
 const ProjectsSection = () => {
