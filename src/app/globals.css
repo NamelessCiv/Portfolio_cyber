@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0a0a0a;
+  --color-foreground: #ffffff;
+  --color-accent: #007fff;
+  --color-secondary: #a0a0a0;
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --accent: #007fff;
+  --secondary: #a0a0a0;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased selection:bg-accent/30 selection:text-white;
+    overflow-x: hidden;
+  }
+
+  /* Glassmorphism utility */
+  .glass {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Security: Prevent image selection, drag, and highlight */
+img,
+svg,
+video {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+/* Optional global unselectable text if desired, but we only target images for now */
