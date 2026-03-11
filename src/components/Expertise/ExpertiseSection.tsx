@@ -39,13 +39,13 @@ const FloatingCard = ({ title, description, delay }: FloatingCardProps) => {
 const ExpertiseSection = () => {
     const skills = [
         {
-            title: "Gestion des Menaces et Vulnérabilités",
-            description: "Identification, analyse et évaluation des vulnérabilités critiques impactant les opérations métier.",
+            title: "Évaluation de Vulnérabilités & Menaces",
+            description: "Classification des actifs organisationnels, modélisation des menaces et utilisation d'outils de scan pour évaluer les risques des systèmes.",
             delay: 0.1,
         },
         {
-            title: "Réponse aux Incidents & SIEM",
-            description: "Détection d'anomalies de réseaux, surveillance des accès et utilisation de playbooks pour isoler les menaces.",
+            title: "Réponse aux Incidents (SIEM)",
+            description: "Détection d'anomalies de réseaux via l'analyse de logs et utilisation de playbooks avancés pour isoler et contenir les menaces.",
             delay: 0.3,
         },
         {
@@ -55,12 +55,12 @@ const ExpertiseSection = () => {
         },
         {
             title: "Investigation Base de Données (SQL)",
-            description: "Analyse des journaux et traces numériques via requêtes SQL pour retracer des attaques ciblées.",
+            description: "Analyse des journaux et traces numériques via requêtes SQL pour extraire des preuves d'accès non autorisés.",
             delay: 0.4,
         },
         {
             title: "Gouvernance, Risque & Conformité",
-            description: "Application stricte de l'éthique de la sécurité et des frameworks globaux de gestion des risques.",
+            description: "Application stricte de l'éthique de la sécurité et des frameworks globaux de gestion des risques organisationnels et contrôles d'accès.",
             delay: 0.5,
         },
     ];

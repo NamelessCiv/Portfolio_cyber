@@ -3,25 +3,27 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const projects = [
-    {
-        title: "Réponse aux Incidents : Playbooks & SIEM",
-        description: "Simulation de détection de menaces et analyse de risques métier, en appliquant des contrôles de sécurité et des playbooks de mitigation.",
-        tags: ["RISK ANALYSIS", "SIEM", "INCIDENT RESPONSE"],
-        img: "/project-soc.jpg"
-    },
-    {
-        title: "Investigation & Scripting BASH/SQL",
+{
+    title: "Réponse aux Incidents : Playbooks & SIEM",
+        description: "Détection d'incidents de sécurité critiques, analyse des logs via SIEM, et mise en œuvre des procédures de réponse documentées.",
+            tags: ["RISK ANALYSIS", "SIEM", "INCIDENT RESPONSE"],
+                img: "/project-soc.jpg",
+                    url: "https://coursera.org/share/ff16c9f88206d4acb96ceae4da3f4332"
+},
+{
+    title: "Investigation & Scripting BASH/SQL",
         description: "Automatisation de la gestion des systèmes de fichiers sous Linux via Bash et requêtes SQL pour extraire des preuves d'accès non autorisés.",
-        tags: ["LINUX", "BASH", "SQL", "FORENSICS"],
-        img: "/project-malware.jpg"
-    },
-    {
-        title: "Analyse de Conformité & Éthique",
-        description: "Audit des cadres de gouvernance de sécurité et recommandations stratégiques pour l'alignement aux standards d'éthique professionnelle.",
-        tags: ["COMPLIANCE", "ETHICS", "FRAMEWORKS"],
-        img: "/project-scanner.jpg"
-    }
+            tags: ["LINUX", "BASH", "SQL", "FORENSICS"],
+                img: "/project-malware.jpg",
+                    url: "https://coursera.org/share/0abf79b15b7a981efbc1db0cffc7e614"
+},
+{
+    title: "Évaluation des Menaces & Vulnérabilités",
+        description: "Classification des actifs organisationnels, analyse des menaces de sécurité et évaluation avancée des vulnérabilités des systèmes.",
+            tags: ["VULNERABILITY", "THREAT MODELING", "ASSETS"],
+                img: "/project-scanner.jpg",
+                    url: "https://coursera.org/share/407a16fc6470332a324d9cc26fb7adb4"
+}
 ];
 
 const ProjectsSection = () => {
@@ -65,12 +67,17 @@ const ProjectsSection = () => {
                                 {project.description}
                             </p>
 
-                            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground hover:text-accent transition-colors">
-                                Voir l'Etude de Cas
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <a
+                                href={project.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground hover:text-accent transition-colors w-fit"
+                            >
+                                Voir la certification associée
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                                 </svg>
-                            </button>
+                            </a>
                         </div>
 
                         {/* Decorative data stream line */}

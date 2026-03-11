@@ -27,6 +27,22 @@ const certificates = [
         id: "YOY6LXBENDMX",
         description: "Bases des systèmes d'exploitation (Linux), gestion via Bash shell, et extraction d'informations depuis des bases de données relationnelles via SQL.",
         url: "https://coursera.org/share/0abf79b15b7a981efbc1db0cffc7e614"
+    },
+    {
+        title: "Assets, Threats, and Vulnerabilities",
+        issuer: "Google",
+        date: "2026",
+        id: "G-ATV2026",
+        description: "Classification des actifs organisationnels, analyse des menaces de sécurité et évaluation avancée des vulnérabilités des systèmes.",
+        url: "https://coursera.org/share/407a16fc6470332a324d9cc26fb7adb4"
+    },
+    {
+        title: "Sound the Alarm: Detection and Response",
+        issuer: "Google",
+        date: "2026",
+        id: "G-SDR2026",
+        description: "Détection d'incidents de sécurité critiques, analyse des logs via SIEM, et mise en œuvre des procédures de réponse documentées.",
+        url: "https://coursera.org/share/ff16c9f88206d4acb96ceae4da3f4332"
     }
 ];
 
@@ -42,7 +58,7 @@ const CertificatesGrid = () => {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {certificates.map((cert, index) => (
                     <motion.div
                         key={index}
