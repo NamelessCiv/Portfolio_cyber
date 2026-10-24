@@ -3,126 +3,104 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const navLinks = [
+    { name: "Profil", href: "#profil" },
+    { name: "Compétences", href: "#competences" },
+    { name: "Projets", href: "#projets" },
+    { name: "Certifications", href: "#certificats" },
+    { name: "Contact", href: "#contact" },
+];
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("home");
-    const [scrolled, setScrolled] = useState(false);
-
-    const navLinks = [
-        { name: "Home", href: "#home" },
-        { name: "Expertise", href: "#expertise" },
-        { name: "Projets", href: "#projets" },
-        { name: "Certificats", href: "#certificats" },
-        { name: "Contact", href: "#contact" },
-    ];
+    const [activeSection, setActiveSection] = useState("");
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener("scroll", handleScroll);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) setActiveSection(entry.target.id);
+                });
+            },
+            { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
+        );
 
-        const observerOptions = {
-            root: null,
-            rootMargin: "-20% 0px -70% 0px",
-            threshold: 0,
-        };
-
-        const observerCallback = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        navLinks.forEach((link) => {
-            const element = document.getElementById(link.href.replace("#", ""));
+        ["home", ...navLinks.map((l) => l.href.slice(1))].forEach((id) => {
+            const element = document.getElementById(id);
             if (element) observer.observe(element);
         });
 
-        return () => {
-            observer.disconnect();
-            window.removeEventListener("scroll", handleScroll);
-        };
+        return () => observer.disconnect();
     }, []);
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-6 md:px-8 py-4 glass mx-4 mt-4 rounded-2xl transition-all duration-500">
-                {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-secondary">
-                    {navLinks.map((link) => {
-                        const isActive = activeSection === link.href.replace("#", "");
-                        return (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className={`transition-all duration-300 uppercase tracking-widest text-[10px] relative group ${isActive ? "text-accent font-bold" : "hover:text-foreground"
-                                    }`}
-                            >
-                                {link.name}
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="activeNav"
-                                        className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
-                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                    />
-                                )}
-                            </a>
-                        );
-                    })}
-                </div>
+            <header className="fixed top-0 inset-x-0 z-50 bg-paper/90 backdrop-blur-sm border-b border-rule">
+                <nav className="frame h-14 flex items-center justify-between gap-6">
+                    <a href="#home" className="flex items-baseline gap-3" aria-label="Retour en haut">
+                        <span className="font-bold tracking-tight text-lg [font-stretch:115%]">JYI</span>
+                        <span className="label text-muted hidden sm:inline">Analyste SOC</span>
+                    </a>
 
-                {/* Mobile menu trigger */}
-                <button
-                    className="md:hidden flex flex-col gap-1.5 z-50 p-2"
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <motion.div
-                        animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                        className="w-6 h-0.5 bg-foreground"
-                    />
-                    <motion.div
-                        animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="w-6 h-0.5 bg-foreground"
-                    />
-                    <motion.div
-                        animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                        className="w-6 h-0.5 bg-foreground"
-                    />
-                </button>
-            </nav>
+                    <ul className="hidden md:flex items-center gap-7">
+                        {navLinks.map((link, i) => {
+                            const isActive = activeSection === link.href.slice(1);
+                            return (
+                                <li key={link.name}>
+                                    <a
+                                        href={link.href}
+                                        className={`group flex items-baseline gap-1.5 text-sm transition-colors ${isActive ? "text-ink" : "text-muted hover:text-ink"}`}
+                                    >
+                                        <span className={`font-mono text-[10px] ${isActive ? "text-signal" : ""}`}>
+                                            0{i + 1}
+                                        </span>
+                                        {link.name}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
 
-            {/* Mobile Overlay */}
+                    <div className="hidden lg:flex items-center gap-2 label text-muted">
+                        <span className="w-1.5 h-1.5 bg-signal" />
+                        Disponible
+                    </div>
+
+                    <button
+                        className="md:hidden label py-2"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-expanded={isOpen}
+                        aria-controls="mobile-menu"
+                    >
+                        {isOpen ? "Fermer" : "Menu"}
+                    </button>
+                </nav>
+            </header>
+
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-8"
+                        id="mobile-menu"
+                        initial={{ clipPath: "inset(0 0 100% 0)" }}
+                        animate={{ clipPath: "inset(0 0 0% 0)" }}
+                        exit={{ clipPath: "inset(0 0 100% 0)" }}
+                        transition={{ duration: 0.4, ease: [0.7, 0, 0.3, 1] }}
+                        className="fixed inset-0 top-14 z-40 bg-ink text-paper md:hidden"
                     >
-                        {navLinks.map((link) => {
-                            const isActive = activeSection === link.href.replace("#", "");
-                            return (
-                                <motion.a
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className={`text-3xl font-bold tracking-tighter transition-colors ${isActive ? "text-accent" : "hover:text-accent/70"
-                                        }`}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.1 }}
-                                >
-                                    {link.name}
-                                </motion.a>
-                            );
-                        })}
+                        <ul className="frame pt-10 flex flex-col">
+                            {navLinks.map((link, i) => (
+                                <li key={link.name} className="border-b border-paper/15">
+                                    <a
+                                        href={link.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className="flex items-baseline justify-between py-5"
+                                    >
+                                        <span className="text-4xl font-semibold tracking-tight [font-stretch:110%]">{link.name}</span>
+                                        <span className="font-mono text-xs text-signal">0{i + 1}</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </motion.div>
                 )}
             </AnimatePresence>
