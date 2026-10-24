@@ -31,8 +31,11 @@ const HeroImage = ({ imagePath }: HeroImageProps) => {
             className="relative"
         >
             <div className="relative">
-                <span
+                <motion.span
                     className="absolute top-[30%] -left-10 md:-left-16 w-24 h-24 md:w-40 md:h-40 rounded-full bg-signal"
+                    initial={{ x: 40, scale: 0.6, opacity: 0 }}
+                    animate={{ x: 0, scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.9, ease: [0.7, 0, 0.3, 1], delay: 1 }}
                     aria-hidden="true"
                 />
                 <CropMarks />

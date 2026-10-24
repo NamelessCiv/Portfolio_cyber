@@ -1,6 +1,7 @@
 import React from "react";
 import SectionHeader from "@/components/SectionHeader";
 import Shape, { ShapeKind } from "@/components/Shape";
+import DefenseFigure from "./DefenseFigure";
 
 const steps: { shape: ShapeKind; verb: string; text: string }[] = [
     {
@@ -19,61 +20,6 @@ const steps: { shape: ShapeKind; verb: string; text: string }[] = [
         text: "Une chronologie claire, des preuves traçables, des recommandations actionnables. Un incident bien raconté n'arrive pas deux fois.",
     },
 ];
-
-const layers = ["Périmètre", "Réseau", "Hôte", "App."];
-
-// Figure : la défense en profondeur traduite en formes primaires
-const DefenseFigure = () => {
-    const size = 400;
-    const step = 40;
-    return (
-        <figure>
-            <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-auto" role="img" aria-labelledby="fig-defense">
-                <title id="fig-defense">Défense en profondeur : quatre couches concentriques protègent les données au centre</title>
-                {layers.map((layer, i) => {
-                    const inset = 40 + i * step;
-                    const side = size - inset * 2;
-                    return (
-                        <g key={layer}>
-                            <rect
-                                x={inset}
-                                y={inset}
-                                width={side}
-                                height={side}
-                                className="fill-none stroke-ink"
-                                strokeWidth={i === 0 ? 2 : 1}
-                            />
-                            <text
-                                x={inset + 8}
-                                y={inset + 16}
-                                className="fill-muted font-mono text-[9px] uppercase tracking-wider"
-                            >
-                                {String(i + 1).padStart(2, "0")} {layer}
-                            </text>
-                        </g>
-                    );
-                })}
-                <circle cx={size / 2} cy={size / 2 + 10} r={26} className="fill-signal" />
-                <text
-                    x={size / 2}
-                    y={size / 2 + 13}
-                    textAnchor="middle"
-                    className="fill-paper font-mono text-[7px] uppercase tracking-wider"
-                >
-                    Données
-                </text>
-                <line x1={size - 22} y1={22} x2={size - 40} y2={40} className="stroke-ink" strokeDasharray="3 3" />
-                <polygon points={`${size},0 ${size},24 ${size - 24},0`} className="fill-ink" />
-            </svg>
-            <figcaption className="mt-4 flex justify-between label text-muted">
-                <span>Fig. 02 — Défense en profondeur</span>
-                <span className="flex items-center gap-1.5">
-                    <Shape kind="triangle" className="w-2.5 h-2.5 text-ink" /> Menace
-                </span>
-            </figcaption>
-        </figure>
-    );
-};
 
 const ProfileSection = () => {
     return (
