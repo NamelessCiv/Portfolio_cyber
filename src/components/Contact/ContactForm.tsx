@@ -70,14 +70,14 @@ const ContactForm = () => {
                 form.reset();
             } else {
                 const data = await response.json();
-                if (Object.hasOwn(data, 'errors')) {
-                    setErrorMessage(data["errors"].map((error: any) => error["message"]).join(", "));
+                if (Array.isArray(data?.errors)) {
+                    setErrorMessage(data.errors.map((err: { message?: string }) => String(err.message ?? "")).join(", "));
                 } else {
                     setErrorMessage("Oups ! Un problème est survenu lors de l'envoi.");
                 }
                 setIsError(true);
             }
-        } catch (error) {
+        } catch {
             setErrorMessage("Oups ! Un problème est survenu lors de l'envoi.");
             setIsError(true);
         } finally {
@@ -94,19 +94,20 @@ const ContactForm = () => {
                 <SectionHeader
                     index="05"
                     label="Contact"
+                    shape="quarter"
                     inverted
                     title={
                         <>
                             Parlons-en<span className="text-signal">.</span>
                         </>
                     }
-                    aside="Un poste, une mission, un projet de sensibilisation ou une identité à construire : écrivez-moi, je réponds personnellement."
+                    aside="Un poste, une mission, une question de sécurité : écrivez-moi, je réponds personnellement."
                 />
 
                 <div className="grid grid-cols-4 md:grid-cols-12 gap-x-6 gap-y-12">
                     <div className="col-span-4 md:col-span-4 flex flex-col gap-8">
                         {[
-                            { k: "Email", v: "yveskurts@gmail.com", href: "https://mail.google.com/mail/?view=cm&fs=1&to=yveskurts@gmail.com" },
+                            { k: "Email", v: "yveskurts@gmail.com", href: "mailto:yveskurts@gmail.com" },
                             { k: "LinkedIn", v: "in/jean-yves-issiolou", href: "https://www.linkedin.com/in/jean-yves-issiolou/" },
                             { k: "GitHub", v: "NamelessCiv", href: "https://github.com/NamelessCiv" },
                         ].map((c) => (
@@ -114,8 +115,7 @@ const ContactForm = () => {
                                 <div className="label text-paper/50 mb-1.5">{c.k}</div>
                                 <a
                                     href={c.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    {...(c.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
                                     className="text-lg hover:text-signal transition-colors break-all"
                                 >
                                     {c.v} ↗
@@ -136,21 +136,21 @@ const ContactForm = () => {
                                     className="flex flex-col gap-10"
                                 >
                                     {/* Honeypot field for bot protection */}
-                                    <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+                                    <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
                                     <label className="block">
                                         <span className="label text-paper/50">01 — Nom</span>
-                                        <input type="text" name="name" required placeholder="Votre nom" className={fieldClass} />
+                                        <input type="text" name="name" required maxLength={100} autoComplete="name" placeholder="Votre nom" className={fieldClass} />
                                     </label>
 
                                     <label className="block">
                                         <span className="label text-paper/50">02 — Email</span>
-                                        <input type="email" name="email" required placeholder="email@exemple.com" className={fieldClass} />
+                                        <input type="email" name="email" required maxLength={100} autoComplete="email" placeholder="email@exemple.com" className={fieldClass} />
                                     </label>
 
                                     <label className="block">
                                         <span className="label text-paper/50">03 — Message</span>
-                                        <textarea name="message" rows={4} required placeholder="Comment puis-je vous aider ?" className={`${fieldClass} resize-none`} />
+                                        <textarea name="message" rows={4} required maxLength={1000} placeholder="Comment puis-je vous aider ?" className={`${fieldClass} resize-none`} />
                                     </label>
 
                                     {isError && (
@@ -194,7 +194,7 @@ const ContactForm = () => {
 
                 <footer className="mt-24 md:mt-36 pt-6 border-t border-paper/20 grid grid-cols-1 md:grid-cols-3 gap-4 label text-paper/50">
                     <span>© 2026 Jean Yves Issiolou</span>
-                    <span className="md:text-center">Composé en Archivo, Instrument Serif &amp; JetBrains Mono</span>
+                    <span className="md:text-center">CSP stricte · Aucun traceur · Aucun cookie</span>
                     <a href="#home" className="md:text-right hover:text-signal transition-colors">Haut de page ↑</a>
                 </footer>
             </div>

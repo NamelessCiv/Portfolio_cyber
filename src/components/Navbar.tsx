@@ -39,7 +39,7 @@ const Navbar = () => {
                 <nav className="frame h-14 flex items-center justify-between gap-6">
                     <a href="#home" className="flex items-baseline gap-3" aria-label="Retour en haut">
                         <span className="font-bold tracking-tight text-lg [font-stretch:115%]">JYI</span>
-                        <span className="label text-muted hidden sm:inline">Analyste SOC / Design</span>
+                        <span className="label text-muted hidden sm:inline">Analyste SOC</span>
                     </a>
 
                     <ul className="hidden md:flex items-center gap-7">

@@ -8,7 +8,7 @@ const ease = [0.7, 0, 0.3, 1] as const;
 const links = [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/jean-yves-issiolou/" },
     { name: "GitHub", href: "https://github.com/NamelessCiv" },
-    { name: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=yveskurts@gmail.com" },
+    { name: "Email", href: "mailto:yveskurts@gmail.com" },
 ];
 
 const HeroContent = () => {
@@ -21,7 +21,7 @@ const HeroContent = () => {
                 transition={{ duration: 0.6 }}
             >
                 <span>Portfolio — Éd. 2026</span>
-                <span className="hidden sm:inline">Cybersécurité × Design graphique</span>
+                <span className="hidden sm:inline">Cybersécurité — Analyse SOC</span>
             </motion.div>
 
             <h1 className="mt-8 md:mt-12 font-semibold tracking-[-0.04em] leading-[0.86] [font-stretch:120%] text-[clamp(3.25rem,10.5vw,9.5rem)]">
@@ -47,9 +47,9 @@ const HeroContent = () => {
                 transition={{ duration: 0.7, delay: 0.6 }}
             >
                 <p className="sm:col-span-5 text-xl md:text-2xl leading-snug tracking-tight text-ink-soft">
-                    Analyste SOC. Je surveille, je détecte, je contiens —{" "}
-                    <em className="font-serif text-[1.15em] text-ink">et je compose</em>. La sécurité et le design
-                    graphique partagent une même exigence&nbsp;: rendre lisible ce qui est complexe.
+                    Analyste SOC. Je surveille, je détecte, je contiens. Mon métier&nbsp;:{" "}
+                    <em className="font-serif text-[1.15em] text-ink">rendre lisible</em> ce qui est complexe,
+                    du journal brut jusqu&apos;au rapport d&apos;incident.
                 </p>
 
                 <div className="sm:col-span-3 flex flex-col justify-end gap-5">
@@ -65,8 +65,7 @@ const HeroContent = () => {
                             <li key={l.name}>
                                 <a
                                     href={l.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    {...(l.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
                                     className="text-muted hover:text-signal transition-colors underline underline-offset-4 decoration-rule"
                                 >
                                     {l.name} ↗

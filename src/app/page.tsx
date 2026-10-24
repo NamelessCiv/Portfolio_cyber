@@ -8,7 +8,7 @@ import ContactForm from "@/components/Contact/ContactForm";
 export default function Home() {
   return (
     <main className="flex flex-col">
-      <HeroContainer imagePath="/whatsapp-photo.jpeg" />
+      <HeroContainer imagePath="/portrait.jpeg" />
       <ProfileSection />
       <ExpertiseSection />
       <ProjectsSection />

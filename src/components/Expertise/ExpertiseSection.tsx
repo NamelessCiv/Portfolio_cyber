@@ -30,11 +30,6 @@ const skills = [
         description: "Éthique de la sécurité, frameworks de gestion des risques et contrôle d'accès.",
         tools: "GRC · NIST CSF · Contrôles",
     },
-    {
-        title: "Design graphique",
-        description: "Identité visuelle, typographie et mise en page — appliquées aussi aux rapports et supports de sensibilisation.",
-        tools: "Composition · Typo · Visuels",
-    },
 ];
 
 const ExpertiseSection = () => {
@@ -44,8 +39,9 @@ const ExpertiseSection = () => {
                 <SectionHeader
                     index="02"
                     label="Compétences"
+                    shape="square"
                     title="Index des compétences"
-                    aside="Ce que je pratique au quotidien, classé comme un sommaire : du terrain technique jusqu'à la manière de le communiquer."
+                    aside="Ce que je pratique au quotidien, classé comme un sommaire : de l'analyse des logs jusqu'à la gouvernance."
                 />
 
                 <ol className="border-t border-ink">

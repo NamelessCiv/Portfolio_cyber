@@ -54,6 +54,7 @@ const CertificatesGrid = () => {
                 <SectionHeader
                     index="04"
                     label="Certifications"
+                    shape="half"
                     title="Registre"
                     aside="Parcours Google Cybersecurity. Chaque entrée est vérifiable en ligne via son lien Coursera."
                 />

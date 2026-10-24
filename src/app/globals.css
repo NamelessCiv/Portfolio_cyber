@@ -3,7 +3,7 @@
 /*
   Système graphique
   - Papier chaud + encre quasi noire : une base "imprimée", loin des fonds néon.
-  - Un seul accent : orange signal, la couleur des alertes et du balisage.
+  - Un seul accent : rouge signal, entre l'affiche suisse et le niveau d'alerte.
 */
 @theme inline {
   --color-paper: #eeebe5;
@@ -11,7 +11,7 @@
   --color-ink: #121211;
   --color-ink-soft: #2a2a28;
   --color-muted: #6d6a64;
-  --color-signal: #ff4f00;
+  --color-signal: #e2341d;
   --color-rule: rgba(18, 18, 17, 0.14);
 
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;

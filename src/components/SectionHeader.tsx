@@ -1,20 +1,25 @@
 import React from "react";
+import Shape, { ShapeKind } from "@/components/Shape";
 
 interface SectionHeaderProps {
     index: string;
     label: string;
+    shape: ShapeKind;
     title: React.ReactNode;
     aside?: React.ReactNode;
     inverted?: boolean;
 }
 
-// En-tête de section façon chapitre de revue : filet, numéro, intitulé
-const SectionHeader = ({ index, label, title, aside, inverted = false }: SectionHeaderProps) => {
+// En-tête de section façon chapitre de revue : filet, forme, numéro, intitulé
+const SectionHeader = ({ index, label, shape, title, aside, inverted = false }: SectionHeaderProps) => {
     return (
         <header className="mb-12 md:mb-20">
             <div className={`flex items-center justify-between label border-t pt-3 ${inverted ? "border-paper text-paper/60" : "border-ink text-muted"}`}>
-                <span>
-                    <span className="text-signal">§{index}</span> — {label}
+                <span className="flex items-center gap-3">
+                    <Shape kind={shape} className="w-3 h-3 text-signal" />
+                    <span>
+                        <span className={inverted ? "text-paper" : "text-ink"}>§{index}</span> — {label}
+                    </span>
                 </span>
                 <span>{index} / 05</span>
             </div>

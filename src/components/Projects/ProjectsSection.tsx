@@ -25,9 +25,6 @@ const projects = [
     },
 ];
 
-// Emplacements réservés aux travaux graphiques (à remplacer par de vraies images)
-const plates = ["Identité visuelle", "Affiche de sensibilisation", "Rapport d'incident mis en page"];
-
 const ProjectsSection = () => {
     return (
         <section id="projets" className="py-20 md:py-32">
@@ -35,8 +32,9 @@ const ProjectsSection = () => {
                 <SectionHeader
                     index="03"
                     label="Projets"
+                    shape="triangle"
                     title="Travaux sélectionnés"
-                    aside="Cas pratiques en cybersécurité, et une série de planches graphiques en cours de préparation."
+                    aside="Cas pratiques réalisés pendant le parcours : réponse aux incidents, investigation et évaluation des menaces."
                 />
 
                 <div className="border-t border-ink">
@@ -75,22 +73,6 @@ const ProjectsSection = () => {
                     ))}
                 </div>
 
-                <div className="mt-20 md:mt-28">
-                    <div className="flex items-center justify-between label text-muted mb-6">
-                        <span>Planches graphiques</span>
-                        <span>En préparation</span>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {plates.map((plate, i) => (
-                            <figure key={plate}>
-                                <div className="hatch aspect-[3/4] border border-rule flex items-end p-4">
-                                    <span className="label bg-paper px-2 py-1">Pl. {String(i + 1).padStart(2, "0")}</span>
-                                </div>
-                                <figcaption className="mt-3 text-sm text-muted">{plate}</figcaption>
-                            </figure>
-                        ))}
-                    </div>
-                </div>
             </div>
         </section>
     );

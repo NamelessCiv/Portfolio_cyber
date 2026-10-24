@@ -1,18 +1,79 @@
 import React from "react";
 import SectionHeader from "@/components/SectionHeader";
+import Shape, { ShapeKind } from "@/components/Shape";
 
-const disciplines = [
+const steps: { shape: ShapeKind; verb: string; text: string }[] = [
     {
-        verb: "Défendre",
-        text: "Lire des journaux d'événements comme on lit une page : chercher le motif, repérer ce qui dépasse, comprendre l'intention derrière le bruit. Détecter tôt, contenir vite, documenter proprement.",
-        keywords: ["SIEM", "Logs", "Incident response", "Linux", "SQL"],
+        shape: "circle",
+        verb: "Détecter",
+        text: "Lire les journaux d'événements comme on lit une page : chercher le motif, repérer ce qui dépasse, comprendre l'intention derrière le bruit.",
     },
     {
-        verb: "Composer",
-        text: "Le design graphique m'a appris la hiérarchie, la grille, le contraste. Les mêmes outils servent à rédiger un rapport d'incident clair, un tableau de bord lisible ou une sensibilisation qui marque.",
-        keywords: ["Typographie", "Grille", "Identité visuelle", "Mise en page"],
+        shape: "square",
+        verb: "Contenir",
+        text: "Isoler l'actif touché, couper le chemin de l'attaquant, appliquer le playbook sans improviser. Limiter l'impact avant tout.",
+    },
+    {
+        shape: "triangle",
+        verb: "Documenter",
+        text: "Une chronologie claire, des preuves traçables, des recommandations actionnables. Un incident bien raconté n'arrive pas deux fois.",
     },
 ];
+
+const layers = ["Périmètre", "Réseau", "Hôte", "App."];
+
+// Figure : la défense en profondeur traduite en formes primaires
+const DefenseFigure = () => {
+    const size = 400;
+    const step = 40;
+    return (
+        <figure>
+            <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-auto" role="img" aria-labelledby="fig-defense">
+                <title id="fig-defense">Défense en profondeur : quatre couches concentriques protègent les données au centre</title>
+                {layers.map((layer, i) => {
+                    const inset = 40 + i * step;
+                    const side = size - inset * 2;
+                    return (
+                        <g key={layer}>
+                            <rect
+                                x={inset}
+                                y={inset}
+                                width={side}
+                                height={side}
+                                className="fill-none stroke-ink"
+                                strokeWidth={i === 0 ? 2 : 1}
+                            />
+                            <text
+                                x={inset + 8}
+                                y={inset + 16}
+                                className="fill-muted font-mono text-[9px] uppercase tracking-wider"
+                            >
+                                {String(i + 1).padStart(2, "0")} {layer}
+                            </text>
+                        </g>
+                    );
+                })}
+                <circle cx={size / 2} cy={size / 2 + 10} r={26} className="fill-signal" />
+                <text
+                    x={size / 2}
+                    y={size / 2 + 13}
+                    textAnchor="middle"
+                    className="fill-paper font-mono text-[7px] uppercase tracking-wider"
+                >
+                    Données
+                </text>
+                <line x1={size - 22} y1={22} x2={size - 40} y2={40} className="stroke-ink" strokeDasharray="3 3" />
+                <polygon points={`${size},0 ${size},24 ${size - 24},0`} className="fill-ink" />
+            </svg>
+            <figcaption className="mt-4 flex justify-between label text-muted">
+                <span>Fig. 02 — Défense en profondeur</span>
+                <span className="flex items-center gap-1.5">
+                    <Shape kind="triangle" className="w-2.5 h-2.5 text-ink" /> Menace
+                </span>
+            </figcaption>
+        </figure>
+    );
+};
 
 const ProfileSection = () => {
     return (
@@ -21,37 +82,38 @@ const ProfileSection = () => {
                 <SectionHeader
                     index="01"
                     label="Profil"
+                    shape="circle"
                     title={
                         <>
-                            Deux disciplines,{" "}
-                            <em className="font-serif font-normal tracking-normal [font-stretch:100%]">une même</em>{" "}
-                            rigueur.
+                            Détecter tôt.{" "}
+                            <em className="font-serif font-normal tracking-normal [font-stretch:100%]">Contenir</em>{" "}
+                            vite.
                         </>
                     }
+                    aside="Analyste SOC formé au parcours Google Cybersecurity. Ma méthode tient en trois temps, appliqués avec la même rigueur à chaque alerte."
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 border-t border-ink">
-                    {disciplines.map((d, i) => (
-                        <article
-                            key={d.verb}
-                            className={`py-10 md:py-12 ${i === 0 ? "md:pr-12 md:border-r border-b md:border-b-0 border-rule" : "md:pl-12"}`}
-                        >
-                            <div className="flex items-baseline justify-between">
-                                <h3 className="text-3xl md:text-4xl font-semibold tracking-tight [font-stretch:115%]">
-                                    {d.verb}
-                                </h3>
-                                <span className="font-mono text-xs text-signal">{i === 0 ? "A" : "B"}</span>
-                            </div>
-                            <p className="mt-6 text-lg leading-relaxed text-ink-soft max-w-xl">{d.text}</p>
-                            <ul className="mt-8 flex flex-wrap gap-2">
-                                {d.keywords.map((k) => (
-                                    <li key={k} className="label border border-ink/25 px-2.5 py-1">
-                                        {k}
-                                    </li>
-                                ))}
-                            </ul>
-                        </article>
-                    ))}
+                <div className="grid grid-cols-4 md:grid-cols-12 gap-x-6 gap-y-14">
+                    <ol className="col-span-4 md:col-span-6 border-t border-ink">
+                        {steps.map((s, i) => (
+                            <li key={s.verb} className="grid grid-cols-6 gap-x-6 py-8 border-b border-rule">
+                                <div className="col-span-1 flex flex-col gap-3 pt-1.5">
+                                    <Shape kind={s.shape} className={`w-5 h-5 ${i === 0 ? "text-signal" : "text-ink"}`} />
+                                    <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, "0")}</span>
+                                </div>
+                                <div className="col-span-5">
+                                    <h3 className="text-3xl md:text-4xl font-semibold tracking-tight [font-stretch:115%]">
+                                        {s.verb}
+                                    </h3>
+                                    <p className="mt-4 text-lg leading-relaxed text-ink-soft">{s.text}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <div className="col-span-4 md:col-span-5 md:col-start-8 md:pt-8">
+                        <DefenseFigure />
+                    </div>
                 </div>
             </div>
         </section>

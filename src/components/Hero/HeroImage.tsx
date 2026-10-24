@@ -31,6 +31,10 @@ const HeroImage = ({ imagePath }: HeroImageProps) => {
             className="relative"
         >
             <div className="relative">
+                <span
+                    className="absolute top-[30%] -left-10 md:-left-16 w-24 h-24 md:w-40 md:h-40 rounded-full bg-signal"
+                    aria-hidden="true"
+                />
                 <CropMarks />
                 <motion.div
                     initial={{ clipPath: "inset(0 0 100% 0)" }}
